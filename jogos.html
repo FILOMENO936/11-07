@@ -20,6 +20,14 @@
       font-size: 1.8rem;
     }
 
+    .nivel {
+      display: none;
+    }
+
+    .ativo {
+      display: block;
+    }
+
     #heart-game {
       margin: 20px auto;
       height: 150px;
@@ -63,7 +71,7 @@
     }
 
     .proximo {
-      display: block;
+      display: none;
       margin: 50px auto 20px;
       background: #c8004d;
       padding: 12px 30px;
@@ -80,23 +88,69 @@
   </style>
 </head>
 <body>
-  <h2>Nível 1: Clica no coração 💖</h2>
-  <div id="heart-game">
-    <span id="heart">💗</span>
+  <div id="nivel1" class="nivel ativo">
+    <h2>Nível 1: Clica no coração 💖</h2>
+    <div id="heart-game">
+      <span id="heart">💗</span>
+    </div>
   </div>
 
-  <h2>Nível 2: Adivinha a palavra secreta</h2>
-  <input type="text" id="resposta" placeholder="Começa com A...">
-  <br>
-  <button onclick="verificaPalavra()">Responder</button>
-  <p id="resultado"></p>
+  <div id="nivel2" class="nivel">
+    <h2>Nível 2: Adivinha a palavra secreta</h2>
+    <input type="text" id="resposta" placeholder="Começa com A...">
+    <br>
+    <button onclick="verificaPalavra()">Responder</button>
+    <p id="resultado"></p>
+  </div>
 
-  <h2>Nível 3: Verdade ou Desafio 😏</h2>
-  <button onclick="sortear()">Sortear</button>
-  <p id="desafio"></p>
+  <div id="nivel3" class="nivel">
+    <h2>Nível 3: Verdade ou Desafio 😏</h2>
+    <button onclick="sortear()">Sortear</button>
+    <p id="desafio"></p>
+    <a class="proximo" id="finalizar" href="final.html">🎁 Ir para a Surpresa Final</a>
+  </div>
 
-  <a class="proximo" href="final.html">🎁 Ir para a Surpresa Final</a>
+  <script>
+    const heart = document.getElementById('heart');
+    const nivel1 = document.getElementById('nivel1');
+    const nivel2 = document.getElementById('nivel2');
+    const nivel3 = document.getElementById('nivel3');
+    const resultado = document.getElementById('resultado');
+    const resposta = document.getElementById('resposta');
+    const desafio = document.getElementById('desafio');
+    const finalizar = document.getElementById('finalizar');
 
-  <script src="script.js"></script>
+    heart.addEventListener('click', () => {
+      nivel1.classList.remove('ativo');
+      nivel2.classList.add('ativo');
+    });
+
+    function verificaPalavra() {
+      const valor = resposta.value.trim().toLowerCase();
+      if (valor === 'amor') {
+        resultado.textContent = 'Acertaste! Vamos para o próximo nível.';
+        setTimeout(() => {
+          nivel2.classList.remove('ativo');
+          nivel3.classList.add('ativo');
+        }, 1500);
+      } else {
+        resultado.textContent = 'Hmm... tenta de novo. Começa com A...';
+      }
+    }
+
+    const desafios = [
+      "Conte uma verdade romântica sobre mim ❤️",
+      "Descreve nosso primeiro beijo 😚",
+      "Desafio: Envia um áudio dizendo 'Te amo muito mais do que imaginas!'",
+      "Verdade: Qual foi o momento mais especial pra ti?",
+      "Desafio: Tira uma selfie sorrindo agora e manda pra mim 😍"
+    ];
+
+    function sortear() {
+      const item = desafios[Math.floor(Math.random() * desafios.length)];
+      desafio.textContent = item;
+      finalizar.style.display = 'inline-block';
+    }
+  </script>
 </body>
 </html>
