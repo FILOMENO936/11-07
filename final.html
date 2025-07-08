@@ -49,6 +49,14 @@
       transform: scale(1.05);
     }
 
+    #mensagemBeijo {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #d10055;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
     @keyframes typing {
       from { width: 0; }
       to { width: 100%; }
@@ -105,6 +113,8 @@
   <button onclick="tocarBeijo()">💋 Mandar Beijo</button>
   <audio id="audioBeijo" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
 
+  <div id="mensagemBeijo"></div>
+
   <footer>
     <div>© 2025 Todos os direitos reservados a <strong>Viltcha Yolene Mateus Correia</strong></div>
     <div>Desenvolvido com amor por <strong>Filomeno Mateus</strong></div>
@@ -112,11 +122,12 @@
 
   <script>
     const audio = document.getElementById("audioBeijo");
+    const msg = document.getElementById("mensagemBeijo");
 
     function tocarBeijo() {
       audio.play();
 
-      // 🎈 Cria balões animados
+      // 🎈 Balões
       for (let i = 0; i < 12; i++) {
         const balao = document.createElement("div");
         balao.className = "balao";
@@ -126,13 +137,11 @@
         setTimeout(() => balao.remove(), 6000);
       }
 
-      // 🕒 Redireciona para o WhatsApp depois de 2s
+      // 💬 Mensagem carinhosa
       setTimeout(() => {
-        const numero = '244936456190'; // número internacional sem "+"
-        const mensagem = encodeURIComponent("Feliz aniversário, minha linda Viltcha! 💋💖 Que o teu dia seja tão incrível quanto tu és pra mim. Beijo 😘");
-        const link = `https://wa.me/${numero}?text=${mensagem}`;
-        window.location.href = link;
-      }, 2000);
+        msg.innerHTML = "Beijo enviado com amor! 💋<br>Tu és o meu presente de todos os dias, Viltcha 💖";
+        msg.style.opacity = 1;
+      }, 1000);
     }
   </script>
 </body>
