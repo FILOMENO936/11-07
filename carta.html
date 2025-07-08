@@ -1,71 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carta para o Amor da Minha Vida 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 0;
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
-      font-family: 'Georgia', serif;
+      font-family: 'Quicksand', sans-serif;
       overflow-x: hidden;
     }
 
     .carta {
       max-width: 720px;
       margin: 80px auto;
-      background: #ffffffde;
+      background: rgba(255, 255, 255, 0.95);
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       text-align: center;
       position: relative;
       z-index: 2;
     }
 
     .carta h2 {
+      font-family: 'Playfair Display', serif;
       color: #c8004d;
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       margin-bottom: 20px;
     }
 
     .typed-text {
-      font-size: 1.3rem;
-      color: #444;
+      font-size: 1.2rem;
+      color: #333;
       line-height: 1.8;
       white-space: pre-line;
       min-height: 280px;
-    }
-
-    .galeria {
-      display: flex;
-      overflow-x: auto;
-      padding: 20px 0;
-      gap: 10px;
-      justify-content: center;
-      scrollbar-width: none;
-    }
-
-    .galeria img {
-      width: 180px;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-      transition: transform 0.4s ease;
-    }
-
-    .galeria img:hover {
-      transform: scale(1.1);
-    }
-
-    .petalas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 1;
+      padding: 10px;
     }
 
     iframe {
@@ -84,6 +57,39 @@
       margin: 50px 0 20px;
     }
 
+    .galeria {
+      display: flex;
+      overflow-x: auto;
+      padding: 10px 0;
+      gap: 12px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .galeria::-webkit-scrollbar {
+      display: none;
+    }
+
+    .galeria img {
+      scroll-snap-align: center;
+      width: 160px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    .petalas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
     .proximo {
       display: inline-block;
       margin-top: 40px;
@@ -93,12 +99,32 @@
       color: white;
       text-decoration: none;
       border-radius: 30px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transition: background 0.3s;
     }
 
     .proximo:hover {
       background-color: #ff85c1;
+    }
+
+    @keyframes cair {
+      0% { top: -10px; opacity: 1; transform: rotate(0deg); }
+      100% { top: 100vh; opacity: 0; transform: rotate(360deg); }
+    }
+
+    @media (max-width: 500px) {
+      .carta {
+        padding: 20px;
+        margin: 40px 16px;
+      }
+
+      .typed-text {
+        font-size: 1rem;
+      }
+
+      .galeria img {
+        width: 130px;
+      }
     }
   </style>
 </head>
@@ -109,7 +135,7 @@
     <h2>Minha linda princesa,</h2>
     <div class="typed-text" id="typed-text"></div>
 
-    <iframe scrolling="no" frameborder="no" allow="autoplay"
+    <iframe scrolling="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/filomeno_mst/amo-a-tua-voz&color=%23ff0066&auto_play=true&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true">
     </iframe>
 
@@ -144,16 +170,6 @@
 
     setInterval(criarPetala, 300);
 
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes cair {
-        0% { top: -10px; opacity: 1; transform: rotate(0deg); }
-        100% { top: 100vh; opacity: 0; transform: rotate(360deg); }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Efeito de digitação
     const textoCompleto = `Hoje, mais do que nunca, eu quis te lembrar de algo simples, mas imenso:\nTu és o amor da minha vida.\n\nEste site é um pedacinho do meu coração digitalizado, feito com carinho, música, memórias e sorrisos.\nCada segundo contigo é uma dádiva. Cada mensagem tua, um poema. Cada chamada, uma canção.\n\nTu és a brisa que acalma, a luz que aquece e o motivo do meu riso fácil.\nE mesmo que a distância às vezes tente nos desafiar... o meu amor por ti vence todas as barreiras.\n\nObrigado por seres quem és.\nObrigado por existires.\n\nEu te amo mais do que todas as letras do dicionário poderiam combinar. 💗`;
 
     let i = 0;
