@@ -1,16 +1,121 @@
-<!-- Mensagem final: Feliz aniversário --><!-- final.html -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mensagem Final</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎉 Feliz Aniversário, Viltcha! 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffe6f0, #fff);
+      font-family: 'Quicksand', sans-serif;
+      color: #c8004d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #ff69b4;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 28px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff85c1;
+      transform: scale(1.05);
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: #ff69b4; }
+    }
+
+    .balao {
+      position: absolute;
+      width: 30px;
+      height: 40px;
+      background: #ff69b4;
+      border-radius: 50% 50% 50% 50%;
+      animation: subir 6s infinite ease-in;
+      opacity: 0.8;
+    }
+
+    @keyframes subir {
+      0% {
+        bottom: -50px;
+        transform: translateX(0);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translateX(30px);
+        opacity: 1;
+      }
+      100% {
+        bottom: 110%;
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9rem;
+      color: #999;
+    }
+  </style>
 </head>
-<body class="center">
-  <h1 id="mensagem"></h1>
+<body>
+  <h1 id="mensagem">Feliz Aniversário, Viltcha! 🎉</h1>
   <button onclick="tocarBeijo()">💋 Mandar Beijo</button>
   <audio id="audioBeijo" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
-  <script src="script.js"></script>
+
+  <footer>
+    © 2025 Todos os direitos reservados a <strong>Viltcha Mateus</strong> · Desenvolvido com amor por <strong>Filomeno</strong>.
+  </footer>
+
+  <script>
+    const audio = document.getElementById("audioBeijo");
+    function tocarBeijo() {
+      audio.play();
+      for (let i = 0; i < 10; i++) {
+        const balao = document.createElement("div");
+        balao.className = "balao";
+        balao.style.left = Math.random() * 100 + "vw";
+        balao.style.background = i % 2 === 0 ? "#ff69b4" : "#ffc0cb";
+        document.body.appendChild(balao);
+        setTimeout(() => balao.remove(), 6000);
+      }
+    }
+  </script>
 </body>
 </html>
