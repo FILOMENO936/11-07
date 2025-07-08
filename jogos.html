@@ -75,11 +75,6 @@
       display: none;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
     #btnPular {
       position: fixed;
       bottom: 30px;
@@ -101,6 +96,17 @@
       background-color: #ff85c1;
     }
 
+    footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
     @media (min-width: 768px) {
       #btnPular {
         display: none !important;
@@ -120,8 +126,10 @@
   </style>
 </head>
 <body>
+
+  <!-- Nível 1 -->
   <div id="nivel1" class="nivel ativo">
-    <h2>Nível 1: Escolhe o coração da confiança </h2>
+    <h2>Nível 1: Escolhe o coração da confiança</h2>
     <div>
       <button class="opcao" onclick="verificaCoracao('💛')">💛</button>
       <button class="opcao" onclick="verificaCoracao('💙')">💙</button>
@@ -131,6 +139,7 @@
     <p id="res1"></p>
   </div>
 
+  <!-- Nível 2 -->
   <div id="nivel2" class="nivel">
     <h2>Nível 2: 5 letras. Adivinha a palavra secreta</h2>
     <p id="digitarTexto"></p>
@@ -140,6 +149,7 @@
     <p id="res2"></p>
   </div>
 
+  <!-- Nível 3 -->
   <div id="nivel3" class="nivel">
     <h2>Nível 3: Pule a idade</h2>
     <canvas id="gameCanvas" width="320" height="160"></canvas>
@@ -147,12 +157,14 @@
     <a id="finalizar" href="final.html" class="opcao">🎁 Ir para a Surpresa Final</a>
   </div>
 
-  <!-- Botão para celular -->
+  <!-- Botão de pulo para celular -->
   <button id="btnPular" onclick="pular()">⬆PULAR</button>
 
+  <!-- Áudios -->
   <audio id="jumpSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_622fba1613.mp3"></audio>
   <audio id="winSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7960c45a70.mp3"></audio>
 
+  <!-- Script principal -->
   <script>
     const nivel1 = document.getElementById('nivel1');
     const nivel2 = document.getElementById('nivel2');
@@ -208,8 +220,7 @@
       }
     }
 
-    let canvas, ctx, jogador, obstaculos, pontos;
-    let intervalo;
+    let canvas, ctx, jogador, obstaculos, pontos, intervalo;
 
     function iniciarJogo() {
       canvas = document.getElementById('gameCanvas');
@@ -223,7 +234,6 @@
       btnPular.style.display = 'inline-block';
 
       document.addEventListener('keydown', pular);
-
       clearInterval(intervalo);
       intervalo = setInterval(() => {
         obstaculos.push({ x: 320, y: 120, w: 10, h: 20 });
@@ -244,6 +254,7 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       jogador.y += jogador.vy;
       jogador.vy += 0.4;
+
       if (jogador.y > 120) {
         jogador.y = 120;
         jogador.vy = 0;
@@ -290,5 +301,10 @@
       requestAnimationFrame(atualizar);
     }
   </script>
+
+  <!-- Rodapé -->
+  <footer>
+    © 2025 Todos os direitos reservados. Desenvolvido com amor por <strong>Viltcha Mateus</strong>.
+  </footer>
 </body>
 </html>
