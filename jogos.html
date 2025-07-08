@@ -177,8 +177,7 @@
     }
 
     // Runner game
-    let canvas, ctx, jogador, obstaculos, pontos, saltosRedencao;
-    let emRedencao = false;
+    let canvas, ctx, jogador, obstaculos, pontos;
 
     function iniciarJogo() {
       canvas = document.getElementById('gameCanvas');
@@ -186,17 +185,14 @@
       jogador = { x: 30, y: 120, w: 20, h: 20, vy: 0, pulando: false };
       obstaculos = [];
       pontos = 0;
-      saltosRedencao = 0;
-      emRedencao = false;
       statusText.textContent = '';
+      statusText.style.color = '';
       finalizar.style.display = 'none';
 
       document.addEventListener('keydown', pular);
 
       setInterval(() => {
-        if (!emRedencao) {
-          obstaculos.push({ x: 320, y: 120, w: 10, h: 20 });
-        }
+        obstaculos.push({ x: 320, y: 120, w: 10, h: 20 });
       }, 1200);
 
       requestAnimationFrame(atualizar);
@@ -207,26 +203,6 @@
         jogador.vy = -6;
         jogador.pulando = true;
         jumpSound.play();
-
-        if (emRedencao) {
-          saltosRedencao++;
-
-          // Regras de pontuação no modo redenção
-          if (saltosRedencao <= 10) {
-            pontos += 2;
-          } else if (saltosRedencao === 11) {
-            pontos += 1;
-          }
-
-          statusText.textContent = `Saltos do recomeço: ${saltosRedencao}/11 — Pontuação: ${pontos}/21`;
-
-          if (saltosRedencao >= 11) {
-            statusText.textContent = 'Redenção completa! Amor eterno conquistado com 11 saltos 💘';
-            statusText.style.color = 'green';
-            finalizar.style.display = 'inline-block';
-            winSound.play();
-          }
-        }
       }
     }
 
@@ -243,39 +219,35 @@
       ctx.fillStyle = '#ff69b4';
       ctx.fillRect(jogador.x, jogador.y, jogador.w, jogador.h);
 
-      if (!emRedencao) {
-        for (let i = 0; i < obstaculos.length; i++) {
-          obstaculos[i].x -= 2;
-          ctx.fillStyle = '#c8004d';
-          ctx.fillRect(obstaculos[i].x, obstaculos[i].y, obstaculos[i].w, obstaculos[i].h);
+      for (let i = 0; i < obstaculos.length; i++) {
+        obstaculos[i].x -= 2;
+        ctx.fillStyle = '#c8004d';
+        ctx.fillRect(obstaculos[i].x, obstaculos[i].y, obstaculos[i].w, obstaculos[i].h);
 
-          if (
-            jogador.x < obstaculos[i].x + obstaculos[i].w &&
-            jogador.x + jogador.w > obstaculos[i].x &&
-            jogador.y < obstaculos[i].y + obstaculos[i].h &&
-            jogador.y + jogador.h > obstaculos[i].y
-          ) {
-            statusText.textContent = 'Oops! Bateu... Mostra que mereces com 11 saltos 🦘';
-            statusText.style.color = 'red';
-            emRedencao = true;
-            pontos = 0;
-            return;
-          }
+        if (
+          jogador.x < obstaculos[i].x + obstaculos[i].w &&
+          jogador.x + jogador.w > obstaculos[i].x &&
+          jogador.y < obstaculos[i].y + obstaculos[i].h &&
+          jogador.y + jogador.h > obstaculos[i].y
+        ) {
+          statusText.textContent = 'Oops! Bateu... o jogo vai recomeçar 💥';
+          statusText.style.color = 'red';
+          setTimeout(() => iniciarJogo(), 2000);
+          return;
         }
+      }
 
-        if (obstaculos.length && obstaculos[0].x < -10) {
-          obstaculos.shift();
-          pontos++;
-          statusText.textContent = `Obstáculos superados: ${pontos}/21`;
-          statusText.style.color = '#333';
+      if (obstaculos.length && obstaculos[0].x < -10) {
+        obstaculos.shift();
+        pontos++;
+        statusText.textContent = `Obstáculos superados: ${pontos}/21`;
 
-          if (pontos >= 21) {
-            statusText.textContent = 'Parabéns! 21 anos superados com amor por Viltcha 💘';
-            statusText.style.color = 'green';
-            finalizar.style.display = 'inline-block';
-            winSound.play();
-            return;
-          }
+        if (pontos >= 21) {
+          statusText.textContent = 'Parabéns! 21 anos superados com amor por Viltcha 💘';
+          statusText.style.color = 'green';
+          finalizar.style.display = 'inline-block';
+          winSound.play();
+          return;
         }
       }
 
