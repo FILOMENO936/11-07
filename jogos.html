@@ -74,7 +74,7 @@
 
   <div id="nivel2" class="nivel">
     <h2>Nível 2: Adivinha a palavra secreta</h2>
-    <p>Dica: Começa com A...</p>
+    <p id="dica"></p>
     <input type="text" id="resposta" placeholder="Escreve aqui...">
     <br>
     <button onclick="verificaPalavra()">Responder</button>
@@ -95,8 +95,20 @@
     const res1 = document.getElementById('res1');
     const res2 = document.getElementById('res2');
     const resposta = document.getElementById('resposta');
+    const dica = document.getElementById('dica');
     const statusText = document.getElementById('status');
     const finalizar = document.getElementById('finalizar');
+
+    let textoDigitando = 'Dica: Começa com A...';
+    let i = 0;
+
+    function digitarDica() {
+      if (i < textoDigitando.length) {
+        dica.textContent += textoDigitando.charAt(i);
+        i++;
+        setTimeout(digitarDica, 50);
+      }
+    }
 
     function verificaCoracao(val) {
       if(val === '🤍') {
@@ -104,6 +116,7 @@
         setTimeout(() => {
           nivel1.classList.remove('ativo');
           nivel2.classList.add('ativo');
+          digitarDica();
         }, 1500);
       } else {
         res1.textContent = 'Hmm... tenta outra vez com o coração certo...';
