@@ -29,7 +29,7 @@
       overflow: hidden;
       border-right: 3px solid #ff69b4;
       width: 0;
-      animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite;
+      animation: typing 4s steps(50, end) forwards, blink 0.7s step-end infinite;
     }
 
     button {
@@ -64,8 +64,8 @@
       width: 30px;
       height: 40px;
       background: #ff69b4;
-      border-radius: 50% 50% 50% 50%;
-      animation: subir 6s infinite ease-in;
+      border-radius: 50%;
+      animation: subir 6s ease-in infinite;
       opacity: 0.8;
     }
 
@@ -91,23 +91,33 @@
       bottom: 10px;
       font-size: 0.9rem;
       color: #999;
+      text-align: center;
+    }
+
+    footer strong {
+      color: #c8004d;
     }
   </style>
 </head>
 <body>
   <h1 id="mensagem">Feliz Aniversário, Viltcha! 🎉</h1>
+
   <button onclick="tocarBeijo()">💋 Mandar Beijo</button>
   <audio id="audioBeijo" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
 
   <footer>
-    © 2025 Todos os direitos reservados a <strong>Viltcha Mateus</strong> · Desenvolvido com amor por <strong>Filomeno</strong>.
+    <div>© 2025 Todos os direitos reservados a <strong>Viltcha Yolene Mateus Correia</strong></div>
+    <div>Desenvolvido com amor por <strong>Filomeno Mateus</strong></div>
   </footer>
 
   <script>
     const audio = document.getElementById("audioBeijo");
+
     function tocarBeijo() {
       audio.play();
-      for (let i = 0; i < 10; i++) {
+
+      // 🎈 Cria balões animados
+      for (let i = 0; i < 12; i++) {
         const balao = document.createElement("div");
         balao.className = "balao";
         balao.style.left = Math.random() * 100 + "vw";
@@ -115,11 +125,15 @@
         document.body.appendChild(balao);
         setTimeout(() => balao.remove(), 6000);
       }
+
+      // 🕒 Redireciona para o WhatsApp depois de 2s
+      setTimeout(() => {
+        const numero = '244936456190'; // número internacional sem "+"
+        const mensagem = encodeURIComponent("Feliz aniversário, minha linda Viltcha! 💋💖 Que o teu dia seja tão incrível quanto tu és pra mim. Beijo 😘");
+        const link = `https://wa.me/${numero}?text=${mensagem}`;
+        window.location.href = link;
+      }, 2000);
     }
   </script>
-<footer>
-  © 2025 Todos os direitos reservados a <strong>Viltcha Mateus</strong> · Desenvolvido com amor por <strong>Filomeno</strong>.
-</footer>
-
 </body>
 </html>
