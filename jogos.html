@@ -13,6 +13,7 @@
       text-align: center;
       padding: 30px;
       color: #c8004d;
+      overflow-x: hidden;
     }
 
     h2 {
@@ -28,28 +29,8 @@
       display: block;
     }
 
-    #heart-game {
-      margin: 20px auto;
-      height: 150px;
-    }
-
-    #heart {
-      font-size: 3rem;
-      cursor: pointer;
-      position: relative;
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      width: 220px;
-      margin-top: 10px;
-    }
-
-    button {
-      margin-top: 15px;
+    button, .opcao {
+      margin: 10px;
       padding: 10px 20px;
       font-size: 1rem;
       background-color: #ff69b4;
@@ -61,7 +42,7 @@
       transition: background 0.3s;
     }
 
-    button:hover {
+    button:hover, .opcao:hover {
       background-color: #ff85c1;
     }
 
@@ -70,86 +51,148 @@
       font-weight: bold;
     }
 
-    .proximo {
-      display: none;
-      margin: 50px auto 20px;
-      background: #c8004d;
-      padding: 12px 30px;
-      border-radius: 30px;
-      color: white;
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: background 0.3s;
-    }
-
-    .proximo:hover {
-      background-color: #ff3366;
+    canvas {
+      background: #fff;
+      display: block;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
   <div id="nivel1" class="nivel ativo">
-    <h2>Nível 1: Clica no coração 💖</h2>
-    <div id="heart-game">
-      <span id="heart">💗</span>
+    <h2>Nível 1: Escolhe o coração da confiança 🤍</h2>
+    <div>
+      <button class="opcao" onclick="verificaCoracao('❤')">❤</button>
+      <button class="opcao" onclick="verificaCoracao('💙')">💙</button>
+      <button class="opcao" onclick="verificaCoracao('🤍')">🤍</button>
+      <button class="opcao" onclick="verificaCoracao('💜')">💜</button>
     </div>
+    <p id="res1"></p>
   </div>
 
   <div id="nivel2" class="nivel">
     <h2>Nível 2: Adivinha a palavra secreta</h2>
-    <input type="text" id="resposta" placeholder="Começa com A...">
+    <p>Dica: Começa com A...</p>
+    <input type="text" id="resposta" placeholder="Escreve aqui...">
     <br>
     <button onclick="verificaPalavra()">Responder</button>
-    <p id="resultado"></p>
+    <p id="res2"></p>
   </div>
 
   <div id="nivel3" class="nivel">
-    <h2>Nível 3: Verdade ou Desafio 😏</h2>
-    <button onclick="sortear()">Sortear</button>
-    <p id="desafio"></p>
-    <a class="proximo" id="finalizar" href="final.html">🎁 Ir para a Surpresa Final</a>
+    <h2>Nível 3: Pula 21 vezes até chegar ao amor eterno 🎮</h2>
+    <canvas id="gameCanvas" width="320" height="160"></canvas>
+    <p id="status"></p>
+    <a id="finalizar" href="final.html" style="display:none;" class="opcao">🎁 Ir para a Surpresa Final</a>
   </div>
 
   <script>
-    const heart = document.getElementById('heart');
     const nivel1 = document.getElementById('nivel1');
     const nivel2 = document.getElementById('nivel2');
     const nivel3 = document.getElementById('nivel3');
-    const resultado = document.getElementById('resultado');
+    const res1 = document.getElementById('res1');
+    const res2 = document.getElementById('res2');
     const resposta = document.getElementById('resposta');
-    const desafio = document.getElementById('desafio');
+    const statusText = document.getElementById('status');
     const finalizar = document.getElementById('finalizar');
 
-    heart.addEventListener('click', () => {
-      nivel1.classList.remove('ativo');
-      nivel2.classList.add('ativo');
-    });
-
-    function verificaPalavra() {
-      const valor = resposta.value.trim().toLowerCase();
-      if (valor === 'amor') {
-        resultado.textContent = 'Acertaste! Vamos para o próximo nível.';
+    function verificaCoracao(val) {
+      if(val === '🤍') {
+        res1.textContent = 'Perfeito! Esse coração representa a confiança. 💖';
         setTimeout(() => {
-          nivel2.classList.remove('ativo');
-          nivel3.classList.add('ativo');
+          nivel1.classList.remove('ativo');
+          nivel2.classList.add('ativo');
         }, 1500);
       } else {
-        resultado.textContent = 'Hmm... tenta de novo. Começa com A...';
+        res1.textContent = 'Hmm... tenta outra vez com o coração certo...';
       }
     }
 
-    const desafios = [
-      "Conte uma verdade romântica sobre mim ❤️",
-      "Descreve nosso primeiro beijo 😚",
-      "Desafio: Envia um áudio dizendo 'Te amo muito mais do que imaginas!'",
-      "Verdade: Qual foi o momento mais especial pra ti?",
-      "Desafio: Tira uma selfie sorrindo agora e manda pra mim 😍"
-    ];
+    function verificaPalavra() {
+      const val = resposta.value.trim().toLowerCase();
+      if(val === 'amor') {
+        res2.textContent = 'Isso mesmo! A palavra mais forte do mundo 💞';
+        setTimeout(() => {
+          nivel2.classList.remove('ativo');
+          nivel3.classList.add('ativo');
+          iniciarJogo();
+        }, 1500);
+      } else {
+        res2.textContent = 'Errado! Dica: começa com A e sentimos todos os dias...';
+      }
+    }
 
-    function sortear() {
-      const item = desafios[Math.floor(Math.random() * desafios.length)];
-      desafio.textContent = item;
-      finalizar.style.display = 'inline-block';
+    // Mini jogo de pular obstáculos (estilo dino runner)
+    let canvas, ctx, jogador, obstaculos, pulando, contagem, pontos;
+
+    function iniciarJogo() {
+      canvas = document.getElementById('gameCanvas');
+      ctx = canvas.getContext('2d');
+      jogador = { x: 30, y: 120, w: 20, h: 20, vy: 0, pulando: false };
+      obstaculos = [];
+      contagem = 0;
+      pontos = 0;
+
+      document.addEventListener('keydown', () => {
+        if (!jogador.pulando) {
+          jogador.vy = -6;
+          jogador.pulando = true;
+        }
+      });
+
+      setInterval(() => {
+        obstaculos.push({ x: 320, y: 120, w: 10, h: 20 });
+      }, 1200);
+
+      requestAnimationFrame(atualizar);
+    }
+
+    function atualizar() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // jogador
+      jogador.y += jogador.vy;
+      jogador.vy += 0.4;
+      if (jogador.y > 120) {
+        jogador.y = 120;
+        jogador.vy = 0;
+        jogador.pulando = false;
+      }
+      ctx.fillStyle = '#ff69b4';
+      ctx.fillRect(jogador.x, jogador.y, jogador.w, jogador.h);
+
+      // obstaculos
+      for (let i = 0; i < obstaculos.length; i++) {
+        obstaculos[i].x -= 2;
+        ctx.fillStyle = '#c8004d';
+        ctx.fillRect(obstaculos[i].x, obstaculos[i].y, obstaculos[i].w, obstaculos[i].h);
+
+        if (
+          jogador.x < obstaculos[i].x + obstaculos[i].w &&
+          jogador.x + jogador.w > obstaculos[i].x &&
+          jogador.y < obstaculos[i].y + obstaculos[i].h &&
+          jogador.y + jogador.h > obstaculos[i].y
+        ) {
+          statusText.textContent = 'Oops! Tenta de novo.';
+          return; // para o jogo
+        }
+      }
+
+      // remover obstaculos antigos e contar pontos
+      if (obstaculos.length && obstaculos[0].x < -10) {
+        obstaculos.shift();
+        pontos++;
+        statusText.textContent = `Obstáculos superados: ${pontos}/21`;
+        if (pontos >= 21) {
+          statusText.textContent = 'Parabéns! Tu passaste todos os 21 anos com amor 💘';
+          finalizar.style.display = 'inline-block';
+          return;
+        }
+      }
+
+      requestAnimationFrame(atualizar);
     }
   </script>
 </body>
