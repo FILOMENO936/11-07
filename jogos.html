@@ -4,8 +4,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogos do Amor</title>
+  <title>Jogos do Amor 💘</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #fffafc);
+      text-align: center;
+      padding: 30px;
+      color: #c8004d;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 1.8rem;
+    }
+
+    #heart-game {
+      margin: 20px auto;
+      height: 150px;
+    }
+
+    #heart {
+      font-size: 3rem;
+      cursor: pointer;
+      position: relative;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 220px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff85c1;
+    }
+
+    #resultado, #desafio {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .proximo {
+      display: block;
+      margin: 50px auto 20px;
+      background: #c8004d;
+      padding: 12px 30px;
+      border-radius: 30px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
+
+    .proximo:hover {
+      background-color: #ff3366;
+    }
+  </style>
 </head>
 <body>
   <h2>Nível 1: Clica no coração 💖</h2>
@@ -13,16 +85,17 @@
     <span id="heart">💗</span>
   </div>
 
-  <h2>Nível 2: Adivinha a palavra</h2>
+  <h2>Nível 2: Adivinha a palavra secreta</h2>
   <input type="text" id="resposta" placeholder="Começa com A...">
+  <br>
   <button onclick="verificaPalavra()">Responder</button>
   <p id="resultado"></p>
 
-  <h2>Nível 3: Verdade ou desafio 😏</h2>
+  <h2>Nível 3: Verdade ou Desafio 😏</h2>
   <button onclick="sortear()">Sortear</button>
   <p id="desafio"></p>
 
-  <button onclick="window.location.href='final.html'">Finalizar 🎁</button>
+  <a class="proximo" href="final.html">🎁 Ir para a Surpresa Final</a>
 
   <script src="script.js"></script>
 </body>
