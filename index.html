@@ -1,9 +1,8 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Surpresa para Meu Amor 💖</title>
   <style>
     body {
@@ -39,18 +38,44 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       transition: 0.3s;
     }
 
     button:hover {
       background: #ff3e7e;
     }
+
+    .mensagem {
+      margin-top: 20px;
+      color: #c8004d;
+      font-weight: bold;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
   <h1>Para o Amor da Minha Vida 💘</h1>
   <p>Clica no botão abaixo para começar a surpresa</p>
-  <button onclick="window.location.href='carta.html'">Play 🎁</button>
+  <button onclick="verificarNome()">Play 🎁</button>
+  <div class="mensagem" id="mensagem"></div>
+
+  <script>
+    function verificarNome() {
+      const nomeCorreto = "Viltcha Yolene Mateus Correia";
+      const entrada = prompt("Digite o seu nome completo para continuar:");
+
+      if (!entrada) {
+        document.getElementById("mensagem").innerText = "😥 O nome é obrigatório para continuar.";
+        return;
+      }
+
+      if (entrada.trim().toLowerCase() === nomeCorreto.toLowerCase()) {
+        window.location.href = "carta.html";
+      } else {
+        document.getElementById("mensagem").innerText = "😕 Ops! Esse nome não está autorizado a ver esta surpresa.";
+      }
+    }
+  </script>
 </body>
 </html>
