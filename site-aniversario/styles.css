@@ -1,1 +1,24 @@
-/* Estilo romântico e responsivo */
+<!-- styles.css -->
+body {
+  font-family: 'Georgia', serif;
+  background: #fff0f5;
+  margin: 0; padding: 20px;
+  text-align: center;
+}
+button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  margin: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+img {
+  width: 150px;
+  margin: 10px;
+  border-radius: 12px;
+}
+.carta { max-width: 600px; margin: auto; }
+#heart { font-size: 2rem; cursor: pointer; display: inline-block; }
