@@ -1,62 +1,98 @@
-<!-- jogos.html -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jogos do Amor 💘</title>
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
       background: linear-gradient(to right, #ffe6f0, #fffafc);
-      text-align: center;
-      padding: 30px;
       color: #c8004d;
-      overflow-x: hidden;
+      padding: 20px;
+      text-align: center;
     }
 
     h2 {
-      margin-top: 40px;
-      font-size: 1.8rem;
+      font-size: 2rem;
+      margin: 30px 0 20px;
     }
 
     .nivel {
       display: none;
+      animation: fadeIn 1s ease forwards;
     }
 
     .ativo {
       display: block;
     }
 
-    button, .opcao {
+    .opcao, button {
       margin: 10px;
-      padding: 10px 20px;
-      font-size: 1rem;
+      padding: 12px 24px;
+      font-size: 1.1rem;
       background-color: #ff69b4;
       color: white;
       border: none;
-      border-radius: 20px;
+      border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
-    button:hover, .opcao:hover {
+    .opcao:hover, button:hover {
       background-color: #ff85c1;
+      transform: scale(1.05);
     }
 
-    #resultado, #desafio {
+    .opcao:active {
+      transform: scale(0.95);
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      margin-top: 10px;
+      width: 70%;
+      max-width: 300px;
+      font-size: 1rem;
+    }
+
+    #resultado, #res1, #res2, #status {
       margin-top: 10px;
       font-weight: bold;
+      min-height: 24px;
     }
 
     canvas {
       background: #fff;
-      display: block;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       margin: 20px auto;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      display: block;
+    }
+
+    #finalizar {
+      margin-top: 20px;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 500px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+      .opcao, button {
+        font-size: 1rem;
+        padding: 10px 18px;
+      }
     }
   </style>
 </head>
@@ -75,7 +111,7 @@
   <div id="nivel2" class="nivel">
     <h2>Nível 2: Adivinha a palavra secreta</h2>
     <p id="digitarTexto"></p>
-    <input type="text" id="resposta" placeholder="Escreve aqui...">
+    <input type="text" id="resposta" placeholder="Escreve aqui..." />
     <br>
     <button onclick="verificaPalavra()">Responder</button>
     <p id="res2"></p>
@@ -85,7 +121,7 @@
     <h2>Nível 3: Pula 21 vezes até chegar ao amor eterno 🎮</h2>
     <canvas id="gameCanvas" width="320" height="160"></canvas>
     <p id="status"></p>
-    <a id="finalizar" href="final.html" style="display:none;" class="opcao">🎁 Ir para a Surpresa Final</a>
+    <a id="finalizar" href="final.html" class="opcao">🎁 Ir para a Surpresa Final</a>
   </div>
 
   <audio id="jumpSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_622fba1613.mp3"></audio>
@@ -102,7 +138,6 @@
     const finalizar = document.getElementById('finalizar');
     const digitarTexto = document.getElementById('digitarTexto');
 
-    // Efeito de digitação
     const textoDigitado = "Dica: Começa com A...";
     let i = 0;
     function digitar() {
@@ -114,8 +149,9 @@
     }
 
     function verificaCoracao(val) {
-      if(val === '🤍') {
+      if (val === '🤍') {
         res1.textContent = 'Perfeito! Esse coração representa a confiança. 💖';
+        res1.style.color = 'green';
         setTimeout(() => {
           nivel1.classList.remove('ativo');
           nivel2.classList.add('ativo');
@@ -123,13 +159,15 @@
         }, 1500);
       } else {
         res1.textContent = 'Hmm... tenta outra vez com o coração certo...';
+        res1.style.color = 'red';
       }
     }
 
     function verificaPalavra() {
       const val = resposta.value.trim().toLowerCase();
-      if(val === 'amor') {
+      if (val === 'amor') {
         res2.textContent = 'Isso mesmo! A palavra mais forte do mundo 💞';
+        res2.style.color = 'green';
         setTimeout(() => {
           nivel2.classList.remove('ativo');
           nivel3.classList.add('ativo');
@@ -137,20 +175,20 @@
         }, 1500);
       } else {
         res2.textContent = 'Errado! Dica: começa com A e sentimos todos os dias...';
+        res2.style.color = 'red';
       }
     }
 
-    // Mini jogo de pular obstáculos (estilo dino runner)
-    let canvas, ctx, jogador, obstaculos, pulando, contagem, pontos;
-    let jumpSound = document.getElementById("jumpSound");
-    let winSound = document.getElementById("winSound");
+    // Jogo de pular
+    let canvas, ctx, jogador, obstaculos, pontos;
+    const jumpSound = document.getElementById('jumpSound');
+    const winSound = document.getElementById('winSound');
 
     function iniciarJogo() {
       canvas = document.getElementById('gameCanvas');
       ctx = canvas.getContext('2d');
       jogador = { x: 30, y: 120, w: 20, h: 20, vy: 0, pulando: false };
       obstaculos = [];
-      contagem = 0;
       pontos = 0;
 
       document.addEventListener('keydown', () => {
@@ -170,7 +208,6 @@
 
     function atualizar() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       jogador.y += jogador.vy;
       jogador.vy += 0.4;
       if (jogador.y > 120) {
@@ -178,6 +215,7 @@
         jogador.vy = 0;
         jogador.pulando = false;
       }
+
       ctx.fillStyle = '#ff69b4';
       ctx.fillRect(jogador.x, jogador.y, jogador.w, jogador.h);
 
@@ -192,7 +230,8 @@
           jogador.y < obstaculos[i].y + obstaculos[i].h &&
           jogador.y + jogador.h > obstaculos[i].y
         ) {
-          statusText.textContent = 'Oops! Tenta de novo.';
+          statusText.textContent = 'Oops! Bateu. Recua e tenta de novo.';
+          statusText.style.color = 'red';
           return;
         }
       }
@@ -201,8 +240,10 @@
         obstaculos.shift();
         pontos++;
         statusText.textContent = `Obstáculos superados: ${pontos}/21`;
+        statusText.style.color = '#333';
         if (pontos >= 21) {
-          statusText.textContent = 'Parabéns! Tu passaste todos os 21 anos com amor 💘';
+          statusText.textContent = 'Parabéns! Amor eterno conquistado 💘';
+          statusText.style.color = 'green';
           finalizar.style.display = 'inline-block';
           winSound.play();
           return;
