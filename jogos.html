@@ -220,7 +220,10 @@
       }
     }
 
-    let canvas, ctx, jogador, obstaculos, pontos, intervalo;
+    let canvas, ctx, jogador, obstaculos, pontos, saltoAtual, intervalo;
+    const pontosPorSalto = 3;
+    const saltosTotais = 6;
+    const pontosFinais = 21;
 
     function iniciarJogo() {
       canvas = document.getElementById('gameCanvas');
@@ -228,6 +231,7 @@
       jogador = { x: 30, y: 120, w: 20, h: 20, vy: 0, pulando: false };
       obstaculos = [];
       pontos = 0;
+      saltoAtual = 0;
       statusText.textContent = '';
       statusText.style.color = '';
       finalizar.style.display = 'none';
@@ -236,7 +240,9 @@
       document.addEventListener('keydown', pular);
       clearInterval(intervalo);
       intervalo = setInterval(() => {
-        obstaculos.push({ x: 320, y: 120, w: 10, h: 20 });
+        if (saltoAtual < saltosTotais) {
+          obstaculos.push({ x: 320, y: 120, w: 10, h: 20 });
+        }
       }, 1200);
 
       requestAnimationFrame(atualizar);
@@ -285,16 +291,19 @@
 
       if (obstaculos.length && obstaculos[0].x < -10) {
         obstaculos.shift();
-        pontos++;
-        statusText.textContent = `Obstáculos superados: ${pontos}/21`;
+        saltoAtual++;
+        pontos += pontosPorSalto;
 
-        if (pontos >= 21) {
-          statusText.textContent = 'Parabéns! 21 anos superados com amor por Viltcha 💘';
+        if (saltoAtual === saltosTotais) {
+          pontos = pontosFinais;
+          statusText.textContent = `Parabéns! 21 anos superados com amor por Viltcha 💘`;
           statusText.style.color = 'green';
           finalizar.style.display = 'inline-block';
           btnPular.style.display = 'none';
           winSound.play();
           return;
+        } else {
+          statusText.textContent = `Saltos: ${saltoAtual}/${saltosTotais} | Pontos: ${pontos}/${pontosFinais}`;
         }
       }
 
@@ -304,7 +313,8 @@
 
   <!-- Rodapé -->
   <footer>
-    © 2025 Todos os direitos reservados. Desenvolvido com amor por <strong>Viltcha Mateus</strong>.
+    © 2025 Todos os direitos reservados a <strong>Viltcha Mateus</strong>.<br>
+    Desenvolvido com carinho por <strong>Filomeno Mateus</strong>.
   </footer>
 </body>
 </html>
