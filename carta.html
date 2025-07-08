@@ -3,18 +3,136 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carta de Amor</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carta para meu amor 💌</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      font-family: 'Georgia', serif;
+      overflow-x: hidden;
+    }
+
+    .carta {
+      max-width: 700px;
+      margin: 60px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .carta h2 {
+      color: #d6005a;
+      margin-bottom: 20px;
+    }
+
+    .carta p {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .galeria {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px 0;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .galeria img {
+      width: 180px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.1);
+    }
+
+    .petalas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    iframe {
+      display: block;
+      margin: 20px auto;
+      border: none;
+      width: 100%;
+      max-width: 500px;
+      height: 120px;
+      border-radius: 10px;
+    }
+
+    h3 {
+      color: #d6005a;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
+
   <div class="petalas" id="petalas"></div>
+
   <div class="carta">
-    <h2>Minha linda,</h2>
-    <p id="letra"></p>
-    <iframe src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/filomeno_mst/amo-a-tua-voz&color=%23ff0066&auto_play=true" width="100%" height="120" frameborder="no" allow="autoplay"></iframe>
-    <button onclick="window.location.href='galeria.html'">Próxima 💞</button>
+    <h2>Minha Linda,</h2>
+    <p>
+      Escrevi esse site pra te lembrar do quanto tu és incrível. Cada dia contigo é uma bênção, uma aventura, uma poesia viva.<br><br>
+      Tu és meu raio de sol, minha calmaria, minha inspiração. Eu te amo mais do que palavras podem expressar. 💗
+    </p>
+
+    <iframe scrolling="no" frameborder="no" allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/filomeno_mst/amo-a-tua-voz&color=%23ff0066&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+    </iframe>
+
+    <h3>✨ Nossos Momentos ✨</h3>
+    <div class="galeria">
+      <img src="imagens/foto1.jpg" alt="nós dois">
+      <img src="imagens/foto2.jpg" alt="nosso sorriso">
+      <img src="imagens/foto3.jpg" alt="teu olhar">
+      <img src="imagens/foto4.jpg" alt="abraço eterno">
+      <img src="imagens/foto5.jpg" alt="felicidade">
+      <img src="imagens/foto6.jpg" alt="risos">
+      <img src="imagens/foto7.jpg" alt="mãos dadas">
+      <img src="imagens/foto8.jpg" alt="nosso mundo">
+      <img src="imagens/foto9.jpg" alt="teus olhos">
+      <img src="imagens/foto10.jpg" alt="nós novamente">
+    </div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    function criarPetala() {
+      const petala = document.createElement('div');
+      petala.textContent = "🌸";
+      petala.style.position = 'absolute';
+      petala.style.left = Math.random() * 100 + 'vw';
+      petala.style.fontSize = (Math.random() * 10 + 20) + 'px';
+      petala.style.animation = `cair ${5 + Math.random() * 5}s linear forwards`;
+      document.getElementById('petalas').appendChild(petala);
+      setTimeout(() => petala.remove(), 10000);
+    }
+
+    setInterval(criarPetala, 300);
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes cair {
+        0% { top: -10px; opacity: 1; transform: rotate(0deg); }
+        100% { top: 100vh; opacity: 0; transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
