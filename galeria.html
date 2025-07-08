@@ -4,17 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galeria</title>
+  <title>🌟 Galeria do Amor</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <h2>Nossos momentos 💫</h2>
+<body class="center">
+  <h2>✨ Nossos momentos mágicos 💫</h2>
+  <p>Cada imagem guarda uma história que vivemos juntos... e ainda temos tantas pela frente!</p>
   <div class="galeria">
-    <!-- Substituir essas imagens pelas reais -->
     <img src="imagens/foto1.jpg" alt="Foto 1">
     <img src="imagens/foto2.jpg" alt="Foto 2">
-    <!-- ... até foto21.jpg -->
+    <img src="imagens/foto3.jpg" alt="Foto 3">
+    <img src="imagens/foto4.jpg" alt="Foto 4">
+    <img src="imagens/foto5.jpg" alt="Foto 5">
+    <img src="imagens/foto6.jpg" alt="Foto 6">
+    <img src="imagens/foto7.jpg" alt="Foto 7">
+    <img src="imagens/foto8.jpg" alt="Foto 8">
+    <img src="imagens/foto9.jpg" alt="Foto 9">
+    <img src="imagens/foto10.jpg" alt="Foto 10">
+    <img src="imagens/foto11.jpg" alt="Foto 11">
+    <img src="imagens/foto12.jpg" alt="Foto 12">
+    <img src="imagens/foto13.jpg" alt="Foto 13">
+    <img src="imagens/foto14.jpg" alt="Foto 14">
+    <img src="imagens/foto15.jpg" alt="Foto 15">
+    <img src="imagens/foto16.jpg" alt="Foto 16">
+    <img src="imagens/foto17.jpg" alt="Foto 17">
+    <img src="imagens/foto18.jpg" alt="Foto 18">
+    <img src="imagens/foto19.jpg" alt="Foto 19">
+    <img src="imagens/foto20.jpg" alt="Foto 20">
+    <img src="imagens/foto21.jpg" alt="Foto 21">
   </div>
-  <button onclick="window.location.href='jogos.html'">Próxima 🎮</button>
+  <button onclick="window.location.href='jogos.html'">🎮 Vamos nos divertir!</button>
+  <div id="petalas"></div>
+  <script>
+    setInterval(() => {
+      const petala = document.createElement('div');
+      petala.textContent = '🌸';
+      petala.style.position = 'fixed';
+      petala.style.left = Math.random() * 100 + 'vw';
+      petala.style.top = '-30px';
+      petala.style.fontSize = '24px';
+      petala.style.animation = 'fall 5s linear forwards';
+      document.getElementById('petalas')?.appendChild(petala);
+      setTimeout(() => petala.remove(), 6000);
+    }, 300);
+  </script>
 </body>
 </html>
