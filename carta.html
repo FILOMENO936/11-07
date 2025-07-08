@@ -31,11 +31,12 @@
       margin-bottom: 20px;
     }
 
-    .carta p {
+    .typed-text {
       font-size: 1.3rem;
       color: #444;
       line-height: 1.8;
       white-space: pre-line;
+      min-height: 280px;
     }
 
     .galeria {
@@ -106,21 +107,7 @@
 
   <div class="carta">
     <h2>Minha linda princesa,</h2>
-    <p>
-      Hoje, mais do que nunca, eu quis te lembrar de algo simples, mas imenso:
-      Tu és o amor da minha vida.
-
-      Este site é um pedacinho do meu coração digitalizado, feito com carinho, música, memórias e sorrisos.
-      Cada segundo contigo é uma dádiva. Cada mensagem tua, um poema. Cada chamada, uma canção.
-
-      Tu és a brisa que acalma, a luz que aquece e o motivo do meu riso fácil.
-      E mesmo que a distância às vezes tente nos desafiar... o meu amor por ti vence todas as barreiras.
-
-      Obrigado por seres quem és.
-      Obrigado por existires.
-
-      Eu te amo mais do que todas as letras do dicionário poderiam combinar. 💗
-    </p>
+    <div class="typed-text" id="typed-text"></div>
 
     <iframe scrolling="no" frameborder="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/filomeno_mst/amo-a-tua-voz&color=%23ff0066&auto_play=true&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true">
@@ -165,6 +152,19 @@
       }
     `;
     document.head.appendChild(style);
+
+    // Efeito de digitação
+    const textoCompleto = `Hoje, mais do que nunca, eu quis te lembrar de algo simples, mas imenso:\nTu és o amor da minha vida.\n\nEste site é um pedacinho do meu coração digitalizado, feito com carinho, música, memórias e sorrisos.\nCada segundo contigo é uma dádiva. Cada mensagem tua, um poema. Cada chamada, uma canção.\n\nTu és a brisa que acalma, a luz que aquece e o motivo do meu riso fácil.\nE mesmo que a distância às vezes tente nos desafiar... o meu amor por ti vence todas as barreiras.\n\nObrigado por seres quem és.\nObrigado por existires.\n\nEu te amo mais do que todas as letras do dicionário poderiam combinar. 💗`;
+
+    let i = 0;
+    function digitar() {
+      if (i < textoCompleto.length) {
+        document.getElementById("typed-text").innerHTML += textoCompleto.charAt(i);
+        i++;
+        setTimeout(digitar, 35);
+      }
+    }
+    window.onload = digitar;
   </script>
 </body>
 </html>
