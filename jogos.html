@@ -74,7 +74,7 @@
 
   <div id="nivel2" class="nivel">
     <h2>Nível 2: Adivinha a palavra secreta</h2>
-    <p id="dica"></p>
+    <p id="digitarTexto"></p>
     <input type="text" id="resposta" placeholder="Escreve aqui...">
     <br>
     <button onclick="verificaPalavra()">Responder</button>
@@ -88,6 +88,9 @@
     <a id="finalizar" href="final.html" style="display:none;" class="opcao">🎁 Ir para a Surpresa Final</a>
   </div>
 
+  <audio id="jumpSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_622fba1613.mp3"></audio>
+  <audio id="winSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7960c45a70.mp3"></audio>
+
   <script>
     const nivel1 = document.getElementById('nivel1');
     const nivel2 = document.getElementById('nivel2');
@@ -95,18 +98,18 @@
     const res1 = document.getElementById('res1');
     const res2 = document.getElementById('res2');
     const resposta = document.getElementById('resposta');
-    const dica = document.getElementById('dica');
     const statusText = document.getElementById('status');
     const finalizar = document.getElementById('finalizar');
+    const digitarTexto = document.getElementById('digitarTexto');
 
-    let textoDigitando = 'Dica: Começa com A...';
+    // Efeito de digitação
+    const textoDigitado = "Dica: Começa com A...";
     let i = 0;
-
-    function digitarDica() {
-      if (i < textoDigitando.length) {
-        dica.textContent += textoDigitando.charAt(i);
+    function digitar() {
+      if (i < textoDigitado.length) {
+        digitarTexto.innerHTML += textoDigitado.charAt(i);
         i++;
-        setTimeout(digitarDica, 50);
+        setTimeout(digitar, 50);
       }
     }
 
@@ -116,7 +119,7 @@
         setTimeout(() => {
           nivel1.classList.remove('ativo');
           nivel2.classList.add('ativo');
-          digitarDica();
+          digitar();
         }, 1500);
       } else {
         res1.textContent = 'Hmm... tenta outra vez com o coração certo...';
@@ -139,6 +142,8 @@
 
     // Mini jogo de pular obstáculos (estilo dino runner)
     let canvas, ctx, jogador, obstaculos, pulando, contagem, pontos;
+    let jumpSound = document.getElementById("jumpSound");
+    let winSound = document.getElementById("winSound");
 
     function iniciarJogo() {
       canvas = document.getElementById('gameCanvas');
@@ -152,6 +157,7 @@
         if (!jogador.pulando) {
           jogador.vy = -6;
           jogador.pulando = true;
+          jumpSound.play();
         }
       });
 
@@ -165,7 +171,6 @@
     function atualizar() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // jogador
       jogador.y += jogador.vy;
       jogador.vy += 0.4;
       if (jogador.y > 120) {
@@ -176,7 +181,6 @@
       ctx.fillStyle = '#ff69b4';
       ctx.fillRect(jogador.x, jogador.y, jogador.w, jogador.h);
 
-      // obstaculos
       for (let i = 0; i < obstaculos.length; i++) {
         obstaculos[i].x -= 2;
         ctx.fillStyle = '#c8004d';
@@ -189,11 +193,10 @@
           jogador.y + jogador.h > obstaculos[i].y
         ) {
           statusText.textContent = 'Oops! Tenta de novo.';
-          return; // para o jogo
+          return;
         }
       }
 
-      // remover obstaculos antigos e contar pontos
       if (obstaculos.length && obstaculos[0].x < -10) {
         obstaculos.shift();
         pontos++;
@@ -201,6 +204,7 @@
         if (pontos >= 21) {
           statusText.textContent = 'Parabéns! Tu passaste todos os 21 anos com amor 💘';
           finalizar.style.display = 'inline-block';
+          winSound.play();
           return;
         }
       }
