@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Carta para o Amor da Minha Vida 💌</title>
+  <title>Fim da Surpresa ✨💘</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     * {
@@ -13,216 +13,152 @@
     }
 
     body {
-      background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
+      background: radial-gradient(circle at top, #fff0f5, #ffe4e1);
       font-family: 'Quicksand', sans-serif;
-      overflow-x: hidden;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      animation: aparecerFundo 1.5s ease-in-out;
-    }
-
-    @keyframes aparecerFundo {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .carta {
-      max-width: 720px;
-      margin: 60px auto;
-      background: rgba(255, 255, 255, 0.97);
-      padding: 40px;
-      border-radius: 24px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
       text-align: center;
-      position: relative;
-      z-index: 2;
-      animation: deslizarParaCima 1.5s ease-out;
+      overflow-x: hidden;
+      animation: fadeIn 2s ease-in-out;
     }
 
-    @keyframes deslizarParaCima {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    .carta h2 {
+    h1 {
       font-family: 'Playfair Display', serif;
       color: #c8004d;
-      font-size: 2.6rem;
-      margin-bottom: 20px;
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
 
-    .typed-text {
+    p {
       font-size: 1.2rem;
-      color: #333;
-      line-height: 1.8;
-      white-space: pre-line;
-      min-height: 280px;
-      padding: 14px;
-      border-left: 5px solid #ff69b4;
-      background: #fffafa;
-      border-radius: 10px;
+      color: #444;
+      margin: 0 20px 1.5rem;
+      max-width: 600px;
     }
 
-    iframe {
-      display: block;
-      margin: 30px auto 10px;
-      border: none;
-      width: 100%;
-      max-width: 500px;
-      height: 120px;
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-    }
-
-    h3 {
-      color: #d6005a;
-      font-size: 1.7rem;
-      margin: 50px 0 20px;
-    }
-
-    .galeria {
-      display: flex;
-      overflow-x: auto;
-      padding: 10px 0;
-      gap: 12px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-
-    .galeria::-webkit-scrollbar {
-      display: none;
-    }
-
-    .galeria img {
-      scroll-snap-align: center;
-      width: 160px;
-      border-radius: 18px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s;
-    }
-
-    .galeria img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-    }
-
-    .petalas {
+    .confete {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .botao-final {
+      margin-top: 30px;
+      padding: 14px 30px;
+      background-color: #ff69b4;
+      color: white;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s, transform 0.2s;
       z-index: 1;
     }
 
-    .proximo {
-      display: inline-block;
-      margin-top: 40px;
-      padding: 14px 32px;
-      font-size: 1rem;
-      background-color: #ff69b4;
-      color: white;
-      text-decoration: none;
-      border-radius: 35px;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .proximo:hover {
+    .botao-final:hover {
       background-color: #ff85c1;
       transform: scale(1.05);
     }
 
     footer {
-      background-color: #fff0f5;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 0.95rem;
-      color: #7a7a7a;
-      margin-top: auto;
-      border-top: 1px solid #ffdce3;
-    }
-
-    @keyframes cair {
-      0% { top: -10px; opacity: 1; transform: rotate(0deg); }
-      100% { top: 100vh; opacity: 0; transform: rotate(360deg); }
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #888;
     }
 
     @media (max-width: 500px) {
-      .carta {
-        padding: 20px;
-        margin: 40px 16px;
+      h1 {
+        font-size: 2.2rem;
       }
 
-      .typed-text {
+      p {
         font-size: 1rem;
       }
 
-      .galeria img {
-        width: 130px;
+      .botao-final {
+        padding: 12px 25px;
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="petalas" id="petalas"></div>
+  <canvas class="confete" id="confete"></canvas>
 
-  <div class="carta">
-    <h2>Minha linda princesa,</h2>
-    <div class="typed-text" id="typed-text"></div>
+  <h1>Checkmate, Meu Amor ♟️❤️</h1>
+  <p>Chegaste ao fim da nossa pequena grande viagem. Cada clique teu foi um passo em direção ao meu coração. E agora, aqui estamos nós — mais conectados do que nunca. Que esta surpresa te abrace sempre que precisares lembrar o quanto és amada.</p>
 
-    <iframe scrolling="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/filomeno_mst/amo-a-tua-voz&color=%23ff0066&auto_play=true&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true">
-    </iframe>
-
-    <h3>✨ PERFEIÇÃO SE FOSSE PESSOA ✨</h3>
-    <div class="galeria">
-      <img src="imagens/foto1.jpg" alt="LINDA">
-      <img src="imagens/foto2.jpg" alt="GATA">
-      <img src="imagens/foto3.jpg" alt="MARAVILHOSA">
-      <img src="imagens/foto4.jpg" alt="PLENA">
-      <img src="imagens/foto5.jpg" alt="SEXY">
-      <img src="imagens/foto6.jpg" alt="FOFA">
-      <img src="imagens/foto7.jpg" alt="INTELIGENTE">
-      <img src="imagens/foto8.jpg" alt="EDUCADA">
-      <img src="imagens/foto9.jpg" alt="UM AMOR EM PESSOA">
-      <img src="imagens/foto10.jpg" alt="MUITO, MAS MUITO LINDA MESMO">
-    </div>
-
-    <a class="proximo" href="jogos.html">🎮 Vamos jogar e nos divertir!</a>
-  </div>
+  <button class="botao-final" onclick="window.location.href='index.html'">🔁 Voltar ao Início</button>
 
   <footer>
-    Feito com 💖 por Filomeno Mateus para Viltcha Yolene — Onde o amor vira código. &copy; 2025
+    Criado por Filomeno Mateus para Viltcha Yolene — Amor que vira código &copy; 2025
   </footer>
 
   <script>
-    function criarPetala() {
-      const petala = document.createElement('div');
-      petala.textContent = "🌸";
-      petala.style.position = 'absolute';
-      petala.style.left = Math.random() * 100 + 'vw';
-      petala.style.fontSize = (Math.random() * 10 + 20) + 'px';
-      petala.style.animation = `cair ${5 + Math.random() * 5}s linear forwards`;
-      document.getElementById('petalas').appendChild(petala);
-      setTimeout(() => petala.remove(), 10000);
+    const canvas = document.getElementById("confete");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confetes = Array.from({length: 150}).map(() => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      r: Math.random() * 6 + 2,
+      d: Math.random() * 150,
+      color: `hsl(${Math.random()*360}, 70%, 60%)`,
+      tilt: Math.random() * 10 - 5,
+      tiltAngle: 0,
+      tiltAngleIncremental: Math.random() * 0.07 + 0.05
+    }));
+
+    function drawConfete(c) {
+      ctx.beginPath();
+      ctx.lineWidth = c.r;
+      ctx.strokeStyle = c.color;
+      ctx.moveTo(c.x + c.tilt + c.r / 2, c.y);
+      ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 2);
+      ctx.stroke();
     }
 
-    setInterval(criarPetala, 300);
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetes.forEach((c, i) => {
+        c.y += Math.cos(c.d) + 2 + c.r / 2;
+        c.tiltAngle += c.tiltAngleIncremental;
+        c.tilt = Math.sin(c.tiltAngle) * 15;
 
-    const textoCompleto = `Hoje, mais do que nunca, eu quis te lembrar de algo simples, mas imenso:\nTu és o amor da minha vida.\n\nEste site é um pedacinho do meu coração digitalizado, feito com carinho, música, memórias e sorrisos.\nCada segundo contigo é uma dádiva. Cada mensagem tua, um poema. Cada chamada, uma canção.\n\nTu és a brisa que acalma, a luz que aquece e o motivo do meu riso fácil.\nE mesmo que a distância às vezes tente nos desafiar... o meu amor por ti vence todas as barreiras.\n\nObrigado por seres quem és.\nObrigado por existires.\n\nEu te amo mais do que todas as letras do dicionário poderiam combinar. 💗`;
+        if (c.y > canvas.height) {
+          confetes[i] = {
+            ...c,
+            x: Math.random() * canvas.width,
+            y: -20,
+            tilt: Math.random() * 10 - 5
+          };
+        }
 
-    let i = 0;
-    function digitar() {
-      const alvo = document.getElementById("typed-text");
-      if (!alvo) return;
-      if (i < textoCompleto.length) {
-        alvo.innerHTML += textoCompleto.charAt(i);
-        i++;
-        setTimeout(digitar, 35);
-      }
+        drawConfete(c);
+      });
+      requestAnimationFrame(update);
     }
-    window.onload = digitar;
+    update();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   </script>
 </body>
 </html>
