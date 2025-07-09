@@ -174,8 +174,10 @@
 
     let i = 0;
     function digitar() {
+      const alvo = document.getElementById("typed-text");
+      if (!alvo) return;
       if (i < textoCompleto.length) {
-        document.getElementById("typed-text").innerHTML += textoCompleto.charAt(i);
+        alvo.innerHTML += textoCompleto.charAt(i);
         i++;
         setTimeout(digitar, 35);
       }
