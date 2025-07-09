@@ -16,6 +16,7 @@
       height: 100vh;
       flex-direction: column;
       text-align: center;
+      animation: fadeIn 1.2s ease-in;
     }
 
     h1 {
@@ -40,10 +41,18 @@
       cursor: pointer;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       transition: 0.3s;
+      position: relative;
+    }
+
+    button::after {
+      content: "💖";
+      margin-left: 10px;
+      animation: pulse 1s infinite ease-in-out;
     }
 
     button:hover {
       background: #ff3e7e;
+      transform: scale(1.03);
     }
 
     .mensagem {
@@ -51,6 +60,36 @@
       color: #c8004d;
       font-weight: bold;
       font-size: 1rem;
+      min-height: 24px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 12px 30px;
+        font-size: 16px;
+      }
+
+      .mensagem {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -60,20 +99,37 @@
   <button onclick="verificarNome()">Play 🎁</button>
   <div class="mensagem" id="mensagem"></div>
 
+  <audio id="sucessoAudio" src="audio/sucesso.mp3" preload="auto"></audio>
+  <audio id="erroAudio" src="audio/erro.mp3" preload="auto"></audio>
+
   <script>
+    function normalizar(str) {
+      return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    }
+
     function verificarNome() {
       const nomeCorreto = "Viltcha Yolene Mateus Correia";
       const entrada = prompt("Digite o seu nome completo para continuar:");
+      const mensagem = document.getElementById("mensagem");
 
       if (!entrada) {
-        document.getElementById("mensagem").innerText = "😥 O nome é obrigatório para continuar.";
+        mensagem.innerText = "😥 O nome é obrigatório para continuar.";
+        document.getElementById("erroAudio").play();
         return;
       }
 
-      if (entrada.trim().toLowerCase() === nomeCorreto.toLowerCase()) {
-        window.location.href = "carta.html";
+      if (normalizar(entrada) === normalizar(nomeCorreto)) {
+        document.getElementById("sucessoAudio").play();
+        mensagem.innerText = "✅ Bem-vinda, minha princesa! Preparando a magia...";
+        setTimeout(() => {
+          window.location.href = "carta.html";
+        }, 1600);
       } else {
-        document.getElementById("mensagem").innerText = "😕 Ops! Esse nome não está autorizado a ver esta surpresa.";
+        mensagem.innerText = "";
+        setTimeout(() => {
+          mensagem.innerText = "😕 Ops! Esse nome não está autorizado a ver esta surpresa. Talvez só o amor verdadeiro saiba a resposta...";
+          document.getElementById("erroAudio").play();
+        }, 400);
       }
     }
   </script>
