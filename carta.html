@@ -6,46 +6,62 @@
   <title>Carta para o Amor da Minha Vida 💌</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
       font-family: 'Quicksand', sans-serif;
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      animation: aparecerFundo 1.5s ease-in-out;
+    }
+
+    @keyframes aparecerFundo {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .carta {
-      width: 90%;
       max-width: 720px;
       margin: 60px auto;
       background: rgba(255, 255, 255, 0.97);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
       text-align: center;
       position: relative;
       z-index: 2;
+      animation: deslizarParaCima 1.5s ease-out;
+    }
+
+    @keyframes deslizarParaCima {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .carta h2 {
       font-family: 'Playfair Display', serif;
       color: #c8004d;
-      font-size: 2.2rem;
+      font-size: 2.6rem;
       margin-bottom: 20px;
     }
 
     .typed-text {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #333;
       line-height: 1.8;
       white-space: pre-line;
-      min-height: 260px;
-      padding: 10px;
-      border-left: 4px solid #ff69b4;
+      min-height: 280px;
+      padding: 14px;
+      border-left: 5px solid #ff69b4;
       background: #fffafa;
-      border-radius: 8px;
+      border-radius: 10px;
     }
 
     iframe {
@@ -55,21 +71,21 @@
       width: 100%;
       max-width: 500px;
       height: 120px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
 
     h3 {
       color: #d6005a;
-      font-size: 1.5rem;
-      margin: 40px 0 16px;
+      font-size: 1.7rem;
+      margin: 50px 0 20px;
     }
 
     .galeria {
       display: flex;
       overflow-x: auto;
       padding: 10px 0;
-      gap: 10px;
+      gap: 12px;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
     }
@@ -80,15 +96,15 @@
 
     .galeria img {
       scroll-snap-align: center;
-      width: 140px;
-      border-radius: 16px;
+      width: 160px;
+      border-radius: 18px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s;
     }
 
     .galeria img:hover {
       transform: scale(1.08);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
     }
 
     .petalas {
@@ -101,14 +117,14 @@
 
     .proximo {
       display: inline-block;
-      margin-top: 30px;
-      padding: 12px 24px;
+      margin-top: 40px;
+      padding: 14px 32px;
       font-size: 1rem;
       background-color: #ff69b4;
       color: white;
       text-decoration: none;
-      border-radius: 30px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      border-radius: 35px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
       transition: background 0.3s, transform 0.2s;
     }
 
@@ -135,24 +151,15 @@
     @media (max-width: 500px) {
       .carta {
         padding: 20px;
-        margin: 30px 12px;
+        margin: 40px 16px;
       }
 
       .typed-text {
-        font-size: 0.95rem;
+        font-size: 1rem;
       }
 
       .galeria img {
-        width: 110px;
-      }
-
-      .carta h2 {
-        font-size: 1.8rem;
-      }
-
-      .proximo {
-        padding: 10px 20px;
-        font-size: 0.95rem;
+        width: 130px;
       }
     }
   </style>
