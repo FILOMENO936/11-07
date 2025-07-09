@@ -5,54 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Surpresa para Meu Amor 💖</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to top, #ffe6eb, #fff);
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
-      animation: fadeIn 1.2s ease-in;
+      background: linear-gradient(-45deg, #ffe6eb, #fff0f5, #ffd6e0, #fff);
+      background-size: 600% 600%;
+      animation: fundoGirando 10s ease infinite;
+      overflow: hidden;
+      position: relative;
     }
 
-    h1 {
+    @keyframes fundoGirando {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .entrada {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: aparecer 2s ease-out forwards 1.5s;
+    }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+      animation: sumir 2s ease forwards 2.5s;
+    }
+
+    .intro h1 {
+      font-size: 3rem;
       color: #d6005a;
-      font-size: 2.8rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    .intro span {
+      font-size: 1.2rem;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes sumir {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .container {
+      text-align: center;
+      max-width: 500px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #d6005a;
+      font-size: 2.2rem;
       margin-bottom: 1rem;
     }
 
     p {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
       color: #444;
+      margin-bottom: 1.5rem;
     }
 
     button {
-      padding: 15px 40px;
-      font-size: 18px;
+      padding: 14px 36px;
+      font-size: 17px;
       background: #d6005a;
       color: white;
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
-      position: relative;
-    }
-
-    button::after {
-      content: "💖";
-      margin-left: 10px;
-      animation: pulse 1s infinite ease-in-out;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
     }
 
     button:hover {
-      background: #ff3e7e;
-      transform: scale(1.03);
+      background-color: #ff4081;
+      transform: scale(1.05);
     }
 
     .mensagem {
@@ -63,19 +127,9 @@
       min-height: 24px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.3); opacity: 0.7; }
-    }
-
     @media (max-width: 480px) {
-      h1 {
-        font-size: 2rem;
+      h2 {
+        font-size: 1.7rem;
       }
 
       p {
@@ -83,22 +137,28 @@
       }
 
       button {
-        padding: 12px 30px;
-        font-size: 16px;
-      }
-
-      .mensagem {
-        font-size: 0.9rem;
+        font-size: 15px;
+        padding: 12px 28px;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Para o Amor da Minha Vida 💘</h1>
-  <p>Clica no botão abaixo para começar a surpresa</p>
-  <button onclick="verificarNome()">Play 🎁</button>
-  <div class="mensagem" id="mensagem"></div>
+  <!-- Intro animada -->
+  <div class="intro">
+    <h1>💘</h1>
+    <span>Carregando surpresa personalizada...</span>
+  </div>
 
+  <!-- Conteúdo principal -->
+  <div class="container entrada">
+    <h2>Para o Amor da Minha Vida 💘</h2>
+    <p>Clica no botão abaixo para começar a surpresa</p>
+    <button onclick="verificarNome()">Play 🎁</button>
+    <div class="mensagem" id="mensagem"></div>
+  </div>
+
+  <!-- Áudios -->
   <audio id="sucessoAudio" src="audio/sucesso.mp3" preload="auto"></audio>
   <audio id="erroAudio" src="audio/erro.mp3" preload="auto"></audio>
 
@@ -120,14 +180,14 @@
 
       if (normalizar(entrada) === normalizar(nomeCorreto)) {
         document.getElementById("sucessoAudio").play();
-        mensagem.innerText = "✅ Bem-vinda, minha princesa! Preparando a magia...";
+        mensagem.innerText = "✅ Bem-vinda, meu amor! Abrindo o mundo encantado...";
         setTimeout(() => {
           window.location.href = "carta.html";
         }, 1600);
       } else {
         mensagem.innerText = "";
         setTimeout(() => {
-          mensagem.innerText = "😕 Ops! Esse nome não está autorizado a ver esta surpresa. Talvez só o amor verdadeiro saiba a resposta...";
+          mensagem.innerText = "😕 Ops! Esse nome não está autorizado a ver esta surpresa.";
           document.getElementById("erroAudio").play();
         }, 400);
       }
