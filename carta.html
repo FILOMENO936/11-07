@@ -11,6 +11,9 @@
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
       font-family: 'Quicksand', sans-serif;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .carta {
@@ -107,6 +110,15 @@
       background-color: #ff85c1;
     }
 
+    footer {
+      background-color: #fff0f5;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: auto;
+    }
+
     @keyframes cair {
       0% { top: -10px; opacity: 1; transform: rotate(0deg); }
       100% { top: 100vh; opacity: 0; transform: rotate(360deg); }
@@ -155,6 +167,10 @@
 
     <a class="proximo" href="jogos.html">🎮 Vamos jogar e nos divertir!</a>
   </div>
+
+  <footer>
+    Feito com 💖 por Filomeno Mateus para Viltcha Yolene | &copy; 2025
+  </footer>
 
   <script>
     function criarPetala() {
